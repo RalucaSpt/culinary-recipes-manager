@@ -1,1 +1,18 @@
-<p>recipe-form works!</p>
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Titlu</mat-label>
+      <input matInput formControlName="title" required>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Ingrediente</mat-label>
+      <textarea matInput formControlName="ingredients" required></textarea>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Instrucțiuni</mat-label>
+      <textarea matInput formControlName="instructions" required></textarea>
+    </mat-form-field>
+  
+    <button mat-button type="submit" [disabled]="recipeForm.invalid">Salvează</button>
+  </form>

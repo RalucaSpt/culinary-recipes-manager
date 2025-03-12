@@ -22,7 +22,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   loadRecipes(): void {
-    this.recipeService.getRecipes().subscribe(
+    this.recipeService.getRecipes(1).subscribe(
       (data) => (this.recipes = data),
       (error) => console.error('Eroare la încărcarea rețetelor:', error)
     );
