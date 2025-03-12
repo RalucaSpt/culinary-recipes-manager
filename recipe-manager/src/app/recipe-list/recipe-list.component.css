@@ -1,0 +1,11 @@
+.container {
+    padding: 20px;
+  }
+  
+  .recipe-card {
+    margin-bottom: 20px;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
