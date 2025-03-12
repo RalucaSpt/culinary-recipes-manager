@@ -1,28 +1,42 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
-  private apiUrl = 'http://localhost:3000/recipes';
+  private recipes: any[] = [
+    { id: 1, title: 'Omletă', ingredients: 'Ouă, sare, piper', instructions: 'Amestecă și prăjește.' },
+    { id: 2, title: 'Salată Caesar', ingredients: 'Lapte, pâine, salată', instructions: 'Taie și amestecă.' },
+  ];
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
-  getRecipes(): Observable<any> {
-    return this.http.get(this.apiUrl);
+  // Obține toate rețetele
+  getRecipes(): Observable<any[]> {
+    return of(this.recipes); // Returnează un Observable cu array-ul de rețete
   }
 
+  // Adaugă o rețetă nouă
   addRecipe(recipe: any): Observable<any> {
-    return this.http.post(this.apiUrl, recipe);
+    const newRecipe = { id: this.recipes.length + 1, ...recipe };
+    this.recipes.push(newRecipe);
+    return of(newRecipe); // Returnează noua rețetă
   }
 
+  // Actualizează o rețetă existentă
   updateRecipe(id: number, recipe: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, recipe);
+    const index = this.recipes.findIndex((r) => r.id === id);
+    if (index !== -1) {
+      this.recipes[index] = { ...this.recipes[index], ...recipe };
+      return of(this.recipes[index]); // Returnează rețeta actualizată
+    }
+    return of(null); // Returnează null dacă rețeta nu există
   }
 
+  // Șterge o rețetă
   deleteRecipe(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    this.recipes = this.recipes.filter((r) => r.id !== id);
+    return of({ success: true }); // Returnează un obiect de confirmare
   }
 }
