@@ -1,24 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../components/confirmation-dialog/confirmation-dialog.component';
 import { RecipeService } from '../../services/recipe.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  imports: [CommonModule, MatCardModule, MatToolbarModule],
+  imports: [CommonModule, MatCardModule, MatToolbarModule, MatButtonModule],
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
   recipes: any[] = [];
+  router = inject(Router);
 
   constructor(private recipeService: RecipeService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.loadRecipes();
+  }
+  navigateToAddSection(): void {
+    this.router.navigate(['/add-recipe']);
   }
 
   loadRecipes(): void {
