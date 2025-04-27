@@ -16,7 +16,7 @@ export const routes: Routes = [
   {
     path: 'recipes/:id',
     // Lazy load componenta pentru detaliile rețetei
-    // loadComponent: () => import('./features/recipes/recipe-detail/recipe-detail.component').then(m => m.RecipeDetailComponent),
+    loadComponent: () => import('./components/recipe-detail/recipe-detail.component').then(m => m.RecipeDetailComponent),
     title: 'Detalii Rețetă' // Poți actualiza titlul dinamic în componentă
   },
    {
