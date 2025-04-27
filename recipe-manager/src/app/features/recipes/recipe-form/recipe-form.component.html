@@ -1,0 +1,86 @@
+<h2>{{ isEditMode ? 'Editează Rețetă' : 'Adaugă Rețetă Nouă' }}</h2>
+
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" novalidate>
+
+  <div class="form-group">
+    <label for="name">Nume Rețetă:</label>
+    <input type="text" id="name" formControlName="name" class="form-control"
+           [ngClass]="{ 'is-invalid': recipeForm.get('name')?.invalid && (recipeForm.get('name')?.touched || recipeForm.get('name')?.dirty) }">
+    <div *ngIf="recipeForm.get('name')?.errors?.['required'] && (recipeForm.get('name')?.touched || recipeForm.get('name')?.dirty)"
+         class="invalid-feedback">
+      Numele rețetei este obligatoriu.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Descriere:</label>
+    <textarea id="description" formControlName="description" class="form-control" rows="3"
+              [ngClass]="{ 'is-invalid': recipeForm.get('description')?.invalid && (recipeForm.get('description')?.touched || recipeForm.get('description')?.dirty) }"></textarea>
+    <div *ngIf="recipeForm.get('description')?.errors?.['required'] && (recipeForm.get('description')?.touched || recipeForm.get('description')?.dirty)"
+         class="invalid-feedback">
+      Descrierea este obligatorie.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="imageUrl">URL Imagine (Opțional):</label>
+    <input type="url" id="imageUrl" formControlName="imageUrl" class="form-control">
+    <img *ngIf="recipeForm.get('imageUrl')?.value && !recipeForm.get('imageUrl')?.errors"
+         [src]="recipeForm.get('imageUrl')?.value" alt="Previzualizare Imagine" class="image-preview">
+  </div>
+
+  <div class="form-group" formArrayName="ingredients">
+    <label>Ingrediente:</label>
+    <div *ngFor="let ingredientControl of ingredientsControls.controls; let i=index" class="ingredient-item">
+      <input type="text" [formControlName]="i" placeholder="Ex: 100g Făină" class="form-control ingredient-input"
+             [ngClass]="{ 'is-invalid': ingredientControl.invalid && (ingredientControl.touched || ingredientControl.dirty) }">
+      <button type="button" (click)="removeIngredient(i)" class="btn btn-danger btn-sm remove-ingredient-btn">Șterge</button>
+      <div *ngIf="ingredientControl.errors?.['required'] && (ingredientControl.touched || ingredientControl.dirty)"
+           class="invalid-feedback">
+        Ingredientul nu poate fi gol.
+      </div>
+    </div>
+    <button type="button" (click)="addIngredient()" class="btn btn-secondary btn-sm add-ingredient-btn">Adaugă Ingredient</button>
+  </div>
+
+
+  <div class="form-group">
+    <label for="instructions">Instrucțiuni:</label>
+    <textarea id="instructions" formControlName="instructions" class="form-control" rows="5"
+              [ngClass]="{ 'is-invalid': recipeForm.get('instructions')?.invalid && (recipeForm.get('instructions')?.touched || recipeForm.get('instructions')?.dirty) }"></textarea>
+    <div *ngIf="recipeForm.get('instructions')?.errors?.['required'] && (recipeForm.get('instructions')?.touched || recipeForm.get('instructions')?.dirty)"
+         class="invalid-feedback">
+      Instrucțiunile sunt obligatorii.
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" [disabled]="recipeForm.invalid">
+      {{ isEditMode ? 'Salvează Modificările' : 'Adaugă Rețeta' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Anulează</button>
+  </div>
+
+</form>
+
+<style>
+  .form-group { margin-bottom: 15px; }
+  .form-control { display: block; width: 100%; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; color: #495057; background-color: #fff; background-clip: padding-box; border: 1px solid #ced4da; border-radius: 0.25rem; transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; }
+  .form-control.is-invalid { border-color: #dc3545; }
+  .invalid-feedback { display: none; width: 100%; margin-top: 0.25rem; font-size: 80%; color: #dc3545; }
+  .form-control.is-invalid ~ .invalid-feedback { display: block; } /* Afișează mesajul dacă e invalid */
+  .ingredient-item { display: flex; align-items: center; margin-bottom: 10px; }
+  .ingredient-input { flex-grow: 1; margin-right: 10px; }
+  .remove-ingredient-btn { flex-shrink: 0; } /* Nu lăsa butonul să se micșoreze */
+  .add-ingredient-btn { margin-top: 5px; }
+  .btn { display: inline-block; font-weight: 400; text-align: center; white-space: nowrap; vertical-align: middle; user-select: none; border: 1px solid transparent; padding: 0.375rem 0.75rem; font-size: 1rem; line-height: 1.5; border-radius: 0.25rem; cursor: pointer; }
+  .btn-primary { color: #fff; background-color: #007bff; border-color: #007bff; }
+  .btn-secondary { color: #fff; background-color: #6c757d; border-color: #6c757d; }
+  .btn-danger { color: #fff; background-color: #dc3545; border-color: #dc3545; }
+  .btn-sm { padding: 0.25rem 0.5rem; font-size: .875rem; line-height: 1.5; border-radius: 0.2rem; }
+  .btn:disabled { opacity: 0.65; cursor: not-allowed; }
+  .form-actions { margin-top: 20px; }
+  .form-actions .btn { margin-right: 10px; }
+  .image-preview { max-width: 150px; height: auto; margin-top: 10px; border: 1px solid #ddd; }
+  /* Adaugă mai multe stiluri după preferințe */
+</style>

@@ -1,0 +1,64 @@
+/* src/app/core/components/not-found/not-found.component.css */
+
+/* Stiluri pentru elementul gazdă al componentei (<app-not-found>) */
+:host {
+    /* Face componenta un block element pentru a putea seta dimensiuni/padding */
+    display: block;
+    /* Centrează textul elementelor inline din interior */
+    text-align: center;
+    /* Spațiu interior în jurul conținutului */
+    padding: 40px 20px;
+    /* O înălțime minimă pentru a permite centrarea verticală pe ecrane mai mari */
+    min-height: 60vh; /* Ajustează valoarea după cum este necesar */
+  
+    /* Folosește flexbox pe host pentru a centra containerul principal */
+    display: flex;
+    justify-content: center; /* Centrează pe orizontală */
+    align-items: center;     /* Centrează pe verticală */
+  }
+  
+  /* Containerul principal din interiorul componentei */
+  .not-found-container {
+    /* Limitează lățimea maximă a conținutului */
+    max-width: 500px;
+  }
+  
+  /* Stil pentru titlul principal (404) */
+  h1 {
+    font-size: 6rem; /* Mărime foarte mare */
+    font-weight: bold; /* Text îngroșat */
+    color: #dc3545; /* Roșu specific pentru erori (similar Bootstrap danger) */
+    margin-bottom: 10px; /* Spațiu sub titlu */
+    line-height: 1; /* Înlătură spațierea extra a liniei */
+  }
+  
+  /* Stil pentru subtitlu (Oops! Pagina nu a fost găsită) */
+  h2 {
+    font-size: 1.8rem;
+    color: #343a40; /* Culoare închisă (similar Bootstrap dark) */
+    margin-bottom: 15px; /* Spațiu sub subtitlu */
+  }
+  
+  /* Stil pentru paragraful de text */
+  p {
+    font-size: 1rem; /* Mărimea standard a textului */
+    color: #6c757d; /* Gri (similar Bootstrap secondary text) */
+    margin-bottom: 30px; /* Spațiu mai mare sub paragraf */
+  }
+  
+  /* Stil pentru link-ul de întoarcere */
+  .back-link {
+    /* Face link-ul să se comporte ca un buton */
+    display: inline-block;
+    padding: 10px 20px; /* Spațiu interior */
+    background-color: #007bff; /* Albastru (similar Bootstrap primary) */
+    color: #fff; /* Text alb */
+    text-decoration: none; /* Înlătură sublinierea link-ului */
+    border-radius: 5px; /* Colțuri rotunjite */
+    transition: background-color 0.3s ease; /* Efect de tranziție la hover */
+  }
+  
+  /* Stil pentru link-ul de întoarcere la hover (când mouse-ul este deasupra) */
+  .back-link:hover {
+    background-color: #0056b3; /* Un albastru mai închis */
+  }

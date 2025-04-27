@@ -1,0 +1,112 @@
+/* src/app/features/recipes/recipe-list/recipe-list.component.css */
+
+/* Stil pentru containerul componentei */
+:host {
+  display: block; /* Componenta ocupă spațiu */
+  padding: 20px 25px; /* Spațiu interior */
+}
+
+/* Stil pentru titlu */
+h2 {
+  margin-top: 0; /* Elimină marginea de sus implicită */
+  margin-bottom: 20px; /* Spațiu sub titlu */
+  color: #333; /* Culoare text */
+  border-bottom: 1px solid #eee; /* Linie subtilă sub titlu */
+  padding-bottom: 10px; /* Spațiu între text și linie */
+}
+
+/* Stil pentru link-ul "Adaugă Rețetă Nouă" */
+a[routerLink="/recipes/new"] { /* Selector specific pentru acest link */
+  display: inline-block; /* Permite setarea padding/margin */
+  margin-bottom: 25px; /* Spațiu sub link, înainte de listă */
+  padding: 10px 18px; /* Mărime buton */
+  background-color: #28a745; /* Verde (Bootstrap success) */
+  color: white; /* Text alb */
+  text-decoration: none; /* Elimină sublinierea */
+  border-radius: 4px; /* Colțuri rotunjite */
+  font-weight: 500; /* Text ușor îngroșat */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Umbră subtilă */
+}
+
+a[routerLink="/recipes/new"]:hover {
+  background-color: #218838; /* Verde mai închis la hover */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15); /* Umbră puțin mai pronunțată */
+}
+
+/* Stil pentru lista de rețete (<ul>) */
+ul {
+  list-style: none; /* Elimină bulinele implicite */
+  padding: 0; /* Elimină padding-ul implicit */
+  margin: 0; /* Elimină margin-ul implicit */
+}
+
+/* Stil pentru fiecare element din listă (<li>) */
+li {
+  display: flex; /* Aliniază numele și butonul pe aceeași linie */
+  justify-content: space-between; /* Spațiu maxim între nume și buton */
+  align-items: center; /* Centrează vertical elementele */
+  padding: 15px 20px; /* Spațiu interior generos */
+  border: 1px solid #e0e0e0; /* Margine fină */
+  margin-bottom: 12px; /* Spațiu între elementele listei */
+  border-radius: 5px; /* Colțuri rotunjite */
+  background-color: #fff; /* Fundal alb */
+  cursor: pointer; /* Indică faptul că elementul este clickabil (datorită [routerLink]) */
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Efect la hover pentru elementele listei */
+li:hover {
+  background-color: #f8f9fa; /* Schimbă ușor fundalul */
+  /* transform: translateY(-2px); Ridică ușor elementul */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08); /* Umbră mai vizibilă */
+  border-color: #ccc; /* Margine puțin mai vizibilă */
+}
+
+/* Numele rețetei (textul direct din <li>) */
+li > span, li > div { /* Dacă numele e înfășurat într-un span/div */
+   flex-grow: 1; /* Permite numelui să ocupe spațiul */
+   margin-right: 15px; /* Spațiu între nume și buton */
+   /* Pentru nume lungi: */
+   /* overflow: hidden; */
+   /* text-overflow: ellipsis; */
+   /* white-space: nowrap; */
+}
+
+/* Stil pentru butonul de ștergere (<button>) */
+li button {
+  padding: 6px 12px; /* Mărime buton */
+  background-color: #dc3545; /* Roșu (Bootstrap danger) */
+  color: white; /* Text alb */
+  border: none; /* Fără margine */
+  border-radius: 4px; /* Colțuri rotunjite */
+  cursor: pointer; /* Cursor specific */
+  font-size: 0.85em; /* Font puțin mai mic */
+  line-height: 1.4; /* Aliniere text în buton */
+  transition: background-color 0.3s ease;
+  flex-shrink: 0; /* Nu lăsa butonul să se micșoreze */
+}
+
+/* Efect la hover pentru butonul de ștergere */
+li button:hover {
+  background-color: #c82333; /* Roșu mai închis */
+}
+
+/* Stil pentru mesajele "Nu există rețete" și "Se încarcă..." (<p>) */
+/* Poți folosi clase dacă preferi, ex: .loading-message, .no-recipes-message */
+ng-template + p, p { /* Selectează paragrafele care sunt afișate din ng-template */
+  color: #6c757d; /* Gri (Bootstrap secondary text) */
+  font-style: italic; /* Text înclinat */
+  text-align: center; /* Centrează textul */
+  margin-top: 30px; /* Spațiu deasupra mesajului */
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+.loading-container 
+{ 
+  text-align: center; 
+  padding: 40px; 
+} 

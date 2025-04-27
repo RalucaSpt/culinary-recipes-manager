@@ -1,0 +1,101 @@
+/* src/app/app.component.css */
+
+/* Stiluri generale și resetări simple */
+:host {
+    display: block; /* Componenta ocupă spațiu */
+  }
+  
+  body { /* Aplică pe body dacă nu ai un reset global */
+    margin: 0;
+    font-family: sans-serif; /* Setează un font de bază */
+    background-color: #f0f2f5; /* O culoare de fundal pentru întreaga pagină */
+  }
+  
+  /* Stil pentru Header */
+  header {
+    background-color: #ffffff; /* Fundal alb pentru header */
+    padding: 10px 20px; /* Spațiu interior */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* O umbră subtilă */
+    border-bottom: 1px solid #e0e0e0; /* Linie fină sub header */
+  }
+  
+  /* Stil pentru lista din navigație (<ul>) */
+  nav ul {
+    list-style: none; /* Elimină bulinele */
+    padding: 0; /* Elimină padding-ul implicit */
+    margin: 0; /* Elimină margin-ul implicit */
+    display: flex; /* Aranjează elementele pe orizontală */
+    align-items: center; /* Centrează vertical elementele din listă */
+    justify-content: flex-end; /* Aliniază elementele la dreapta (sau center, flex-start) */
+    gap: 20px; /* Spațiu între elementele listei */
+  }
+  
+  
+  /* Stil pentru link-urile din navigație (<a>) */
+  nav ul li a {
+    color: #333; /* Culoare text link */
+    text-decoration: none; /* Elimină sublinierea */
+    padding: 8px 12px; /* Spațiu în jurul textului pentru click facil */
+    border-radius: 4px; /* Colțuri ușor rotunjite */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Efect la hover pentru link-uri */
+  nav ul li a:hover {
+    background-color: #e9ecef; /* Fundal deschis la hover */
+    color: #0056b3; /* Culoare text la hover */
+  }
+  
+  /* Stil pentru link-ul activ (adaugă `routerLinkActive="active-link"` în HTML) */
+  nav ul li a.active-link {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+  nav ul li a.active-link:hover {
+      background-color: #0056b3;
+      color: white;
+  }
+  
+  
+  /* Stil pentru butonul de Logout */
+  .logout-button {
+    background: none; /* Fără fundal */
+    border: none; /* Fără margine */
+    color: #dc3545; /* Culoare roșie pentru acțiune de 'logout'/'delete' */
+    cursor: pointer; /* Cursor specific pentru elemente clickabile */
+    padding: 8px 12px; /* Aliniere similară cu link-urile */
+    margin: 0; /* Elimină marginile implicite ale butonului */
+    font-size: inherit; /* Folosește aceeași mărime de font ca restul textului */
+    font-family: inherit; /* Folosește același font */
+    /* text-decoration: underline; Poți adăuga subliniere dacă vrei să arate mai mult ca un link */
+    transition: color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    color: #a71d2a; /* Un roșu mai închis la hover */
+    /* text-decoration: none; Scoate sublinierea la hover dacă ai adăugat-o */
+  }
+  
+  /* Stil pentru containerul principal (<main>) */
+  main.main-container {
+    max-width: 1200px; /* Lățime maximă pentru conținutul principal */
+    margin: 20px auto; /* Spațiu sus/jos și centrare orizontală */
+    padding: 20px 30px; /* Spațiu interior generos */
+    background-color: #ffffff; /* Fundal alb pentru zona de conținut */
+    border-radius: 5px; /* Colțuri rotunjite */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Umbră foarte subtilă */
+    min-height: 75vh; /* Înălțime minimă pentru a împinge footer-ul în jos */
+  }
+  
+  /* Stil pentru Footer */
+  footer {
+    background-color: #343a40; /* Fundal închis pentru footer */
+    color: #f8f9fa; /* Text deschis */
+    padding: 20px; /* Spațiu interior */
+    text-align: center; /* Centrează textul (dacă adaugi conținut) */
+    margin-top: 30px; /* Spațiu deasupra footer-ului */
+  }
+  
+  /* Poți adăuga aici selectori mai specifici dacă ai conținut în footer */
+  /* footer p { margin: 0; } */
