@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Recipe, RecipeService } from '../../../../core/services/recipe.service';
+import { Recipe, RecipeService } from '../../../core/services/recipe.service';
 import { Observable, switchMap } from 'rxjs';
 
 @Component({

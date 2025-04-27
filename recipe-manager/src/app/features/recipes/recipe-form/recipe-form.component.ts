@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 // Importă ReactiveFormsModule direct aici dacă nu e global
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { RecipeService } from '../../../../core/services/recipe.service';
+import { RecipeService } from '../../../core/services/recipe.service';
 import { switchMap, tap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 

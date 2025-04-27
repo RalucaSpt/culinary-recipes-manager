@@ -18,25 +18,25 @@ export const routes: Routes = [
   // Rute pentru rețete (unele pot fi publice, altele private)
   {
     path: 'recipes',
-    loadComponent: () => import('./features/auth/recipes/recipe-list/recipe-list.component').then(m => m.RecipeListComponent),
+    loadComponent: () => import('./features/recipes/recipe-list/recipe-list.component').then(m => m.RecipeListComponent),
     title: 'Rețete'
     // Poate fi accesibilă public
   },
   {
     path: 'recipes/new',
-    loadComponent: () => import('./features/auth/recipes/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
+    loadComponent: () => import('./features/recipes/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
     canActivate: [authGuard], // <<< PROTEJAT: Doar userii logați pot adăuga
     title: 'Adaugă Rețetă'
   },
   {
     path: 'recipes/:id',
-    loadComponent: () => import('./features/auth/recipes/recipe-detail/recipe-detail.component').then(m => m.RecipeDetailComponent),
+    loadComponent: () => import('./features/recipes/recipe-detail/recipe-detail.component').then(m => m.RecipeDetailComponent),
     title: 'Detalii Rețetă'
     // Poate fi accesibilă public
   },
   {
     path: 'recipes/:id/edit',
-    loadComponent: () => import('./features/auth/recipes/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
+    loadComponent: () => import('./features/recipes/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
     canActivate: [authGuard], // <<< PROTEJAT: Doar userii logați pot edita
     title: 'Editează Rețetă'
   },
