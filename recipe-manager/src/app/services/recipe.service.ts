@@ -13,7 +13,7 @@ export class RecipeService {
   constructor() {}
 
   // Obține toate rețetele
-  getRecipes(id: number): Observable<any[]> {
+  getRecipes(): Observable<any[]> {
     return of(this.recipes); // Returnează un Observable cu array-ul de rețete
   }
 

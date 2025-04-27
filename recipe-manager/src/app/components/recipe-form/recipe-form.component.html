@@ -1,18 +1,28 @@
 <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="fill">
-      <mat-label>Titlu</mat-label>
-      <input matInput formControlName="title" required>
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill">
-      <mat-label>Ingrediente</mat-label>
-      <textarea matInput formControlName="ingredients" required></textarea>
-    </mat-form-field>
-  
-    <mat-form-field appearance="fill">
-      <mat-label>Instrucțiuni</mat-label>
-      <textarea matInput formControlName="instructions" required></textarea>
-    </mat-form-field>
-  
-    <button mat-button type="submit" [disabled]="recipeForm.invalid">Salvează</button>
-  </form>
+  <mat-form-field appearance="fill">
+    <mat-label>Titlu</mat-label>
+    <input matInput formControlName="title" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Adaugă Ingredient</mat-label>
+    <input matInput #ingredientInput formControlName="ingredient" required>
+    <button matSuffix mat-icon-button (click)="addIngredient(ingredientInput)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-chip-set>
+    <mat-chip *ngFor="let ingredient of ingredients" [removable]="true" (removed)="removeIngredient(ingredient)">
+      {{ ingredient }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-set>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Instrucțiuni</mat-label>
+    <textarea matInput formControlName="instructions" required></textarea>
+  </mat-form-field>
+
+  <button mat-button type="submit" [disabled]="recipeForm.invalid">Salvează</button>
+</form>
