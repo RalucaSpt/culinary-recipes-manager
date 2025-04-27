@@ -1,0 +1,16 @@
+/* src/app/shared/components/spinner/spinner.component.css */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1); /* Margine gri deschis */
+    border-left-color: #007bff; /* Culoare accent (albastru) */
+    border-radius: 50%; /* Cerc perfect */
+    width: 30px; /* Dimensiune spinner */
+    height: 30px;
+    animation: spin 1s linear infinite; /* Animație */
+    margin: 20px auto; /* Centrează spinner-ul dacă este singur */
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }

@@ -96,3 +96,8 @@
     color: #6c757d;
     font-style: italic;
   }
+
+  .loading-container {
+    text-align: center; 
+    padding: 40px; 
+  } 

@@ -1,14 +1,20 @@
 <h2>Lista Rețete</h2>
-<a routerLink="/recipes/new">Adaugă Rețetă Nouă</a>
+<a routerLink="/recipes/new" class="add-recipe-link">Adaugă Rețetă Nouă</a> <div *ngIf="isLoading" class="loading-container">
+   <app-spinner></app-spinner>
+   </div>
 
-<div *ngIf="recipes$ | async as recipes; else loading">
-  <ul *ngIf="recipes.length > 0; else noRecipes">
-    <li *ngFor="let recipe of recipes" [routerLink]="['/recipes', recipe._id]">
-      {{ recipe.name }}
-      <button (click)="deleteRecipe(recipe._id, $event)">Șterge</button>
-    </li>
-  </ul>
-  <ng-template #noRecipes><p>Nu există rețete.</p></ng-template>
+<div *ngIf="!isLoading">
+  <div *ngIf="loadingError" class="alert alert-danger">
+      {{ loadingError }}
+  </div>
+
+  <div *ngIf="!loadingError && (recipes$ | async) as recipes; else genericErrorOrNoData">
+    <ul *ngIf="recipes.length > 0; else noRecipes" class="recipe-list"> <li *ngFor="let recipe of recipes" [routerLink]="['/recipes', recipe._id]" class="recipe-item"> <span>{{ recipe.name }}</span> <button (click)="deleteRecipe(recipe._id, $event)" class="delete-button">Șterge</button> </li>
+    </ul>
+    <ng-template #noRecipes>
+        <p class="no-recipes-message">Nu există rețete adăugate.</p> </ng-template>
+  </div>
+
+  <ng-template #genericErrorOrNoData>
+      </ng-template>
 </div>
-
-<ng-template #loading><p>Se încarcă rețetele...</p></ng-template>

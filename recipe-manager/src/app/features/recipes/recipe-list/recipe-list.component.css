@@ -104,3 +104,9 @@ ng-template + p, p { /* Selectează paragrafele care sunt afișate din ng-templa
   background-color: #f8f9fa;
   border-radius: 4px;
 }
+
+.loading-container 
+{ 
+  text-align: center; 
+  padding: 40px; 
+} 
