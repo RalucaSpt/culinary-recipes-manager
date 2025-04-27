@@ -1,0 +1,20 @@
+/* src/app/app.component.css */
+
+/* Stilizare container principal (dacă ai unul) */
+.main-container {
+    max-width: 1200px; /* Setează o lățime maximă pentru conținut */
+    margin: 0 auto; /* Centrează containerul pe pagină */
+    padding: 20px; /* Spațiu interior */
+  }
+  
+  /* Stiluri de bază pentru containerul unde se încarcă rutele */
+  main {
+    padding: 20px 0; /* Spațiu vertical în jurul conținutului principal */
+    background-color: #f8f9fa; /* O culoare de fundal foarte deschisă */
+    border-radius: 5px;
+    min-height: 70vh; /* Asigură o înălțime minimă */
+  }
+  
+  /* Poți adăuga stiluri pentru un posibil <nav> sau <footer> aici */
+  /* nav { ... } */
+  /* footer { ... } */

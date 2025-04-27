@@ -1,11 +1,84 @@
-.container {
-    padding: 20px;
-  }
-  
-  .recipe-card {
-    margin-bottom: 20px;
-  }
-  
-  .spacer {
-    flex: 1 1 auto;
-  }
+/* src/app/features/recipes/recipe-list/recipe-list.component.css */
+
+:host {
+  display: block; /* Asigură că componenta ocupă spațiu */
+  padding: 15px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Stil pentru link-ul/butonul de adăugare */
+.add-recipe-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 10px 15px;
+  background-color: #28a745; /* Verde */
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.add-recipe-link:hover {
+  background-color: #218838; /* Verde mai închis */
+}
+
+/* Stil pentru lista de rețete */
+.recipe-list {
+  list-style: none; /* Elimină bulinele implicite */
+  padding: 0;
+  margin: 0;
+}
+
+/* Stil pentru fiecare element din listă */
+.recipe-item {
+  display: flex; /* Aliniază numele și butonul pe aceeași linie */
+  justify-content: space-between; /* Spațiu între nume și buton */
+  align-items: center; /* Centrează vertical elementele */
+  padding: 15px 10px;
+  border: 1px solid #eee;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer; /* Indică faptul că elementul este clickabil */
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recipe-item:hover {
+  background-color: #f8f9fa; /* Schimbă ușor fundalul la hover */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Adaugă o umbră subtilă */
+}
+
+/* Numele rețetei în listă */
+.recipe-item span {
+  flex-grow: 1; /* Permite numelui să ocupe spațiul disponibil */
+  margin-right: 15px; /* Spațiu între nume și buton */
+}
+
+/* Butonul de ștergere */
+.delete-button {
+  padding: 5px 10px;
+  background-color: #dc3545; /* Roșu */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0; /* Nu lăsa butonul să se micșoreze */
+}
+
+.delete-button:hover {
+  background-color: #c82333; /* Roșu mai închis */
+}
+
+/* Mesaje pentru încărcare sau lipsă rețete */
+.loading-message,
+.no-recipes-message {
+  color: #6c757d; /* Gri */
+  font-style: italic;
+  margin-top: 20px;
+}
