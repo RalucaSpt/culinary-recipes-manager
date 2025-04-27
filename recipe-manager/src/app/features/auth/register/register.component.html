@@ -1,1 +1,56 @@
-<p>register works!</p>
+<h2>Înregistrare Cont Nou</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" class="form-control"
+           [ngClass]="{ 'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched }">
+    <div *ngIf="registerForm.get('email')?.errors?.['required'] && registerForm.get('email')?.touched" class="invalid-feedback">
+      Emailul este obligatoriu.
+    </div>
+    <div *ngIf="registerForm.get('email')?.errors?.['email'] && registerForm.get('email')?.touched" class="invalid-feedback">
+      Introduceți un email valid.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Parola:</label>
+    <input type="password" id="password" formControlName="password" class="form-control"
+           [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }">
+    <div *ngIf="registerForm.get('password')?.errors?.['required'] && registerForm.get('password')?.touched" class="invalid-feedback">
+      Parola este obligatorie.
+    </div>
+    <div *ngIf="registerForm.get('password')?.errors?.['minlength'] && registerForm.get('password')?.touched" class="invalid-feedback">
+      Parola trebuie să aibă minim {{ registerForm.get('password')?.errors?.['minlength']?.requiredLength }} caractere.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="confirmPassword">Confirmă Parola:</label>
+    <input type="password" id="confirmPassword" formControlName="confirmPassword" class="form-control"
+           [ngClass]="{ 'is-invalid': (registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched) || passwordsMismatchError }">
+     <div *ngIf="registerForm.get('confirmPassword')?.errors?.['required'] && registerForm.get('confirmPassword')?.touched" class="invalid-feedback">
+      Confirmarea parolei este obligatorie.
+    </div>
+    <div *ngIf="passwordsMismatchError" class="invalid-feedback">
+      Parolele nu se potrivesc.
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
+  </div>
+
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || isLoading">
+      {{ isLoading ? 'Se înregistrează...' : 'Înregistrează-te' }}
+    </button>
+  </div>
+</form>
+
+<p class="mt-3">
+  Ai deja cont? <a routerLink="/login">Autentifică-te aici</a>
+</p>
