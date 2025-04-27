@@ -34,7 +34,7 @@ export const routes: Routes = [
   {
     // Wildcard route pentru pagini 404 (creează o componentă NotFound)
     path: '**',
-    // loadComponent: () => import('./core/components/not-found/not-found.component').then(m => m.NotFoundComponent),
+    loadComponent: () => import('./components/not-found/not-found.component').then(m => m.NotFoundComponent),
     title: 'Pagina Nu A Fost Găsită'
   }
 ];
