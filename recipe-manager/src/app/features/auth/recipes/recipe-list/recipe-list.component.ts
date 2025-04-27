@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Necesită CommonModule pentru *ngFor, async pipe etc.
 import { RouterLink } from '@angular/router'; // Necesită RouterLink pentru navigare
 import { Observable } from 'rxjs';
-import { Recipe, RecipeService } from '../../services/recipe.service'; // Importă serviciul și interfața rețetă
+import { Recipe, RecipeService } from '../../../../core/services/recipe.service'; // Importă serviciul și interfața rețetă
 
 @Component({
   selector: 'app-recipe-list',

@@ -1,8 +1,0 @@
-<mat-toolbar color="primary">
-    <span>Manager de Rețete</span>
-    <span class="spacer"></span>
-    <button mat-button (click)="navigateToAddSection()">Adaugă Rețetă</button>
-  </mat-toolbar>
-  
-  <app-recipe-form (recipeSubmitted)="onRecipeSubmitted($event)"></app-recipe-form>
-  <app-recipe-list [recipes]="recipes" (deleteRecipe)="onDeleteRecipe($event)"></app-recipe-list>

@@ -4,25 +4,25 @@ export const routes: Routes = [
   {
     path: 'recipes',
     // Lazy load componenta pentru lista de rețete
-    loadComponent: () => import('./components/recipe-list/recipe-list.component').then(m => m.RecipeListComponent),
+    loadComponent: () => import('./features/auth/recipes/recipe-list/recipe-list.component').then(m => m.RecipeListComponent),
     title: 'Rețete' // Opțional: Setează titlul paginii
   },
   {
     path: 'recipes/new',
     // Lazy load componenta pentru formularul de adăugare
-    loadComponent: () => import('./components/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
+    loadComponent: () => import('./features/auth/recipes/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
     title: 'Adaugă Rețetă'
   },
   {
     path: 'recipes/:id',
     // Lazy load componenta pentru detaliile rețetei
-    loadComponent: () => import('./components/recipe-detail/recipe-detail.component').then(m => m.RecipeDetailComponent),
+    loadComponent: () => import('./features/auth/recipes/recipe-detail/recipe-detail.component').then(m => m.RecipeDetailComponent),
     title: 'Detalii Rețetă' // Poți actualiza titlul dinamic în componentă
   },
    {
     path: 'recipes/:id/edit',
     // Lazy load componenta pentru formularul de editare (poți refolosi RecipeFormComponent)
-    loadComponent: () => import('./components/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
+    loadComponent: () => import('./features/auth/recipes/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
     title: 'Editează Rețetă'
   },
   {
