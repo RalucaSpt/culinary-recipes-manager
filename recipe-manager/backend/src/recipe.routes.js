@@ -13,4 +13,21 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Ruta POST /api/recipes
+router.post('/', async (req, res) => {
+    try {
+      const { title, description, ingredients, instructions, imageUrl } = req.body;
+  
+      const result = await pool.query(
+        'INSERT INTO recipes (title, description, ingredients, instructions, imageurl) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+        [title, description, ingredients, instructions, imageUrl]
+      );
+  
+      res.status(201).json(result.rows[0]);
+    } catch (error) {
+      console.error('Eroare la POST /api/recipes:', error);
+      res.status(500).json({ error: 'Eroare la salvarea rețetei' });
+    }
+  });
+  
 module.exports = router;

@@ -4,9 +4,9 @@
 
     <div class="form-group">
       <label for="name">Nume Rețetă:</label>
-      <input type="text" id="name" formControlName="name" class="form-control"
-            [ngClass]="{ 'is-invalid': recipeForm.get('name')?.invalid && (recipeForm.get('name')?.touched || recipeForm.get('name')?.dirty) }">
-      <div *ngIf="recipeForm.get('name')?.errors?.['required'] && (recipeForm.get('name')?.touched || recipeForm.get('name')?.dirty)"
+      <input type="text" id="title" formControlName="title" class="form-control"
+            [ngClass]="{ 'is-invalid': recipeForm.get('title')?.invalid && (recipeForm.get('title')?.touched || recipeForm.get('title')?.dirty) }">
+      <div *ngIf="recipeForm.get('title')?.errors?.['required'] && (recipeForm.get('title')?.touched || recipeForm.get('title')?.dirty)"
           class="invalid-feedback">
         Numele rețetei este obligatoriu.
       </div>
