@@ -9,8 +9,10 @@
   </div>
 
   <div *ngIf="!loadingError && (recipes$ | async) as recipes; else genericErrorOrNoData">
-    <ul *ngIf="recipes.length > 0; else noRecipes" class="recipe-list"> <li *ngFor="let recipe of recipes" [routerLink]="['/recipes', recipe._id]" class="recipe-item"> <span>{{ recipe.name }}</span> <button (click)="deleteRecipe(recipe._id, $event)" class="delete-button">Șterge</button> </li>
-    </ul>
+    <li *ngFor="let recipe of recipes" [routerLink]="['/recipes', recipe.id]" class="recipe-item">
+      <span>{{ recipe.name }}</span>
+      <button (click)="deleteRecipe(recipe.id, $event)" class="delete-button">Șterge</button>
+    </li>
     <ng-template #noRecipes>
         <p class="no-recipes-message">Nu există rețete adăugate.</p> </ng-template>
   </div>

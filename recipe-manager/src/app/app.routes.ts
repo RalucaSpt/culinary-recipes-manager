@@ -25,7 +25,7 @@ export const routes: Routes = [
   {
     path: 'recipes/new',
     loadComponent: () => import('./features/recipes/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
-    canActivate: [authGuard], // <<< PROTEJAT: Doar userii logați pot adăuga
+   // canActivate: [authGuard], // <<< PROTEJAT: Doar userii logați pot adăuga
     title: 'Adaugă Rețetă'
   },
   {
@@ -37,7 +37,7 @@ export const routes: Routes = [
   {
     path: 'recipes/:id/edit',
     loadComponent: () => import('./features/recipes/recipe-form/recipe-form.component').then(m => m.RecipeFormComponent),
-    canActivate: [authGuard], // <<< PROTEJAT: Doar userii logați pot edita
+  //  canActivate: [authGuard], // <<< PROTEJAT: Doar userii logați pot edita
     title: 'Editează Rețetă'
   },
 

@@ -16,7 +16,7 @@
          </ul>
 
          <h3>Instrucțiuni:</h3>
-         <div class="recipe-instructions">{{ recipe.instructions }}</div> <div class="recipe-actions"> <a [routerLink]="['/recipes', recipe._id, 'edit']" class="action-link">Editează Rețeta</a>
+         <div class="recipe-instructions">{{ recipe.instructions }}</div> <div class="recipe-actions"> <a [routerLink]="['/recipes', recipe.id, 'edit']" class="action-link">Editează Rețeta</a>
              <a routerLink="/recipes" class="action-link back-link">Înapoi la listă</a>
          </div>
      </ng-container>

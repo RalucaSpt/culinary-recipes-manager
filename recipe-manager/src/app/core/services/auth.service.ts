@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
+
 // Definește o interfață pentru răspunsul de la login (minim un token)
 export interface AuthResponse {
   token: string;

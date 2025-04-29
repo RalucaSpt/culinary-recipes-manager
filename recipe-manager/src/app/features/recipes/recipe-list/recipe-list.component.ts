@@ -49,15 +49,15 @@ export class RecipeListComponent implements OnInit {
      );
   }
 
-  deleteRecipe(id: string, event: Event): void {
+  deleteRecipe(id: string | number, event: Event): void {
       event.stopPropagation();
       if (confirm('Sigur dorești să ștergi această rețetă?')) {
           // Poți adăuga un indicator de loading specific pentru ștergere dacă dorești
-          this.recipeService.deleteRecipe(id).subscribe({
+          this.recipeService.deleteRecipe(id.toString()).subscribe({
               next: () => {
                   console.log('Rețetă ștearsă cu succes');
                   // Reîncarcă lista după ștergere
-                  this.loadRecipes(); // Folosește metoda reîncărcare
+                  this.loadRecipes(); // Folosește metoda reîncărcare 
                   // Afișează un toast de succes aici
               },
               error: (err) => {
