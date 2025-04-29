@@ -88,14 +88,5 @@
     min-height: 75vh; /* Înălțime minimă pentru a împinge footer-ul în jos */
   }
   
-  /* Stil pentru Footer */
-  footer {
-    background-color: #343a40; /* Fundal închis pentru footer */
-    color: #f8f9fa; /* Text deschis */
-    padding: 20px; /* Spațiu interior */
-    text-align: center; /* Centrează textul (dacă adaugi conținut) */
-    margin-top: 30px; /* Spațiu deasupra footer-ului */
-  }
-  
   /* Poți adăuga aici selectori mai specifici dacă ai conținut în footer */
   /* footer p { margin: 0; } */
