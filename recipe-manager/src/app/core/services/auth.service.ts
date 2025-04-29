@@ -4,6 +4,16 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 
+
+// Definește o interfață pentru răspunsul de la login (minim un token)
+export interface AuthResponse {
+  token: string;
+  // Poți adăuga și alte date despre utilizator dacă backend-ul le returnează
+  // userId?: string;
+  // email?: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })

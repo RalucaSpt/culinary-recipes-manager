@@ -8,9 +8,6 @@ import { authInterceptor } from './core/interceptors/auth.interceptor';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    // Configurează HttpClient pentru a folosi interceptorul
-    provideHttpClient(
-      withInterceptors([authInterceptor]) // Adaugă interceptorul aici
-    )  
+    provideHttpClient() // ← aceasta e linia care lipsea
   ]
-  };
+};
