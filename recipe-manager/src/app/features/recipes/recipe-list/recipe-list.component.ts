@@ -25,7 +25,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   loadRecipes(): void {
-    this.isLoading = true;
+    this.isLoading = false;
     this.loadingError = null;
   
     console.log('Se face request către getRecipes()...');
