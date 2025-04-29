@@ -22,7 +22,7 @@ export class AuthService {
   private router = inject(Router);
 
   // URL-uri către API-ul de backend (ajustează dacă backend-ul tău are altă adresă)
-  private apiUrl = '/api/auth'; // Presupunem prefix /api/auth
+  private apiUrl = 'http://localhost:3000/api/auth'; // Updated to point to the backend running on localhost:3000
 
   // BehaviorSubject pentru a stoca și emite starea de autentificare
   // Inițial, presupunem că nu este autentificat, dar verificăm sesiunea în constructor

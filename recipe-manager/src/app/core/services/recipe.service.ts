@@ -18,7 +18,7 @@ export interface Recipe {
 })
 export class RecipeService {
   private http = inject(HttpClient);
-  private apiUrl =  '/api/recipes';
+  private apiUrl =  'http://localhost:3000/api/recipes'; // Updated to point to the backend running on localhost:3000
 
   constructor() { }
 
