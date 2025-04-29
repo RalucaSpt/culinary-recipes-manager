@@ -14,7 +14,7 @@ import { EMPTY } from 'rxjs';
   // Adaugă ReactiveFormsModule în imports
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './recipe-form.component.html',
-  styleUrls: ['./recipe-form.component.scss']
+  styleUrls: ['./recipe-form.component.css']
 })
 export class RecipeFormComponent implements OnInit {
   private fb = inject(FormBuilder);
