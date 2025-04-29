@@ -9,23 +9,7 @@ export const authInterceptor: HttpInterceptorFn = (
   next: HttpHandlerFn
 ) => {
   const authService = inject(AuthService);
-  const authToken = authService.getToken();
 
-  // Verifică dacă request-ul este către API-ul nostru (opțional, dar recomandat)
-  // și dacă există un token
-  // const isApiUrl = req.url.startsWith('/api'); // Ajustează dacă e necesar
 
-  if (authToken /*&& isApiUrl*/) {
-    // Clonează request-ul și adaugă header-ul Authorization
-    const authReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${authToken}` // Standardul 'Bearer' token
-      }
-    });
-    // Trimite request-ul clonat mai departe
-    return next(authReq);
-  } else {
-    // Dacă nu e token sau nu e request către API, trimite request-ul original
-    return next(req);
-  }
+  return next(req);
 };
