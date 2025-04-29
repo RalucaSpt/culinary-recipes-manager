@@ -3,12 +3,12 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-// Definește tipul pentru o rețetă
+// Tipul corect pentru o rețetă, conform bazei de date și frontendului
 export interface Recipe {
-  id: string | number;     // <-- Asta e cheia
-  name: string;
+  id: string | number;
+  title: string;
   description: string;
-  ingredients: string[];
+  ingredients: string; // JSON string care va fi parsată în frontend
   instructions: string;
   imageUrl?: string;
 }
@@ -18,8 +18,7 @@ export interface Recipe {
 })
 export class RecipeService {
   private http = inject(HttpClient);
-
-  private apiUrl = 'http://localhost:3000/api/recipes'; // URL complet backend
+  private apiUrl =  '/api/recipes';
 
   constructor() { }
 
@@ -29,22 +28,22 @@ export class RecipeService {
   }
 
   // Obține o rețetă după ID
-  getRecipeById(id: string): Observable<Recipe> {
+  getRecipeById(id: string | number): Observable<Recipe> {
     return this.http.get<Recipe>(`${this.apiUrl}/${id}`);
   }
 
   // Creează o rețetă nouă
-  createRecipe(recipeData: Omit<Recipe, '_id'>): Observable<Recipe> {
+  createRecipe(recipeData: Omit<Recipe, 'id'>): Observable<Recipe> {
     return this.http.post<Recipe>(this.apiUrl, recipeData);
   }
 
   // Actualizează o rețetă
-  updateRecipe(id: string, recipeData: Partial<Recipe>): Observable<Recipe> {
+  updateRecipe(id: string | number, recipeData: Partial<Recipe>): Observable<Recipe> {
     return this.http.put<Recipe>(`${this.apiUrl}/${id}`, recipeData);
   }
 
   // Șterge o rețetă
-  deleteRecipe(id: string): Observable<void> {
+  deleteRecipe(id: string | number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

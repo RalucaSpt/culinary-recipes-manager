@@ -63,7 +63,8 @@
               "buildTarget": "recipe-manager:build:production"
             },
             "development": {
-              "buildTarget": "recipe-manager:build:development"
+              "buildTarget": "recipe-manager:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

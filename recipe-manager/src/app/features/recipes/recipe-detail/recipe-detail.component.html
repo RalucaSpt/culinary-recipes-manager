@@ -10,8 +10,8 @@
 
    <ng-container *ngIf="!loadingError && (recipe$ | async) as recipe">
      <ng-container *ngIf="recipe; else recipeNotFoundOrError">
-         <h2>{{ recipe.name }}</h2>
-         <img *ngIf="recipe.imageUrl" [src]="recipe.imageUrl" [alt]="recipe.name" class="recipe-image"> <p class="recipe-description">{{ recipe.description }}</p> <h3>Ingrediente:</h3>
+         <h2>{{ recipe.title }}</h2>
+         <img *ngIf="recipe.imageUrl" [src]="recipe.imageUrl" [alt]="recipe.title" class="recipe-image"> <p class="recipe-description">{{ recipe.description }}</p> <h3>Ingrediente:</h3>
          <ul class="ingredients-list"> <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
          </ul>
 
