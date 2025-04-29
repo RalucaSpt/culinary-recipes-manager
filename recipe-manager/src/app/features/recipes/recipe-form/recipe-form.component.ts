@@ -23,7 +23,7 @@ export class RecipeFormComponent {
   ) {
     // AICI creezi formularul corect:
     this.recipeForm = this.fb.group({
-      name: ['', Validators.required],
+      title : ['', Validators.required],
       description: ['', Validators.required],
       imageUrl: [''],
       ingredients: this.fb.array([
