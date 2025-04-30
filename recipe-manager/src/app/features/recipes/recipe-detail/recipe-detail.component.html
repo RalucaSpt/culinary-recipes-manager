@@ -1,28 +1,41 @@
+<!-- Loading Spinner -->
 <div *ngIf="isLoading" class="loading-container">
+  <p>Loading...</p>
   <app-spinner></app-spinner>
+</div>
+
+<!-- Error Message -->
+<div *ngIf="!isLoading && loadingError" class="alert alert-danger">
+  <p>Error: {{ loadingError }}</p>
+  <br>
+  <a routerLink="/recipes" class="action-link back-link">Înapoi la listă</a>
+</div>
+
+<!-- Recipe Details -->
+<div *ngIf="!isLoading && !loadingError && recipe">
+  <h2>{{ recipe.title }}</h2>
+  <img *ngIf="recipe.imageUrl" [src]="recipe.imageUrl" [alt]="recipe.title" class="recipe-image">
+  <p class="recipe-description">{{ recipe.description }}</p>
+
+  <h3>Ingrediente:</h3>
+  <!-- Check if ingredients is actually an array before iterating -->
+  <ul *ngIf="recipe.ingredients && recipe.ingredients.length > 0" class="ingredients-list">
+    <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
+  </ul>
+  <p *ngIf="!recipe.ingredients || recipe.ingredients.length === 0">Nu sunt specificate ingrediente.</p>
+
+
+  <h3>Instrucțiuni:</h3>
+  <div class="recipe-instructions">{{ recipe.instructions }}</div>
+
+  <div class="recipe-actions">
+    <a [routerLink]="['/recipes', recipe.id, 'edit']" class="action-link">Editează Rețeta</a>
+    <a routerLink="/recipes" class="action-link back-link">Înapoi la listă</a>
   </div>
+</div>
 
-<div *ngIf="!isLoading">
-   <div *ngIf="loadingError" class="alert alert-danger">
-       {{ loadingError }}
-       <br> <a routerLink="/recipes" class="action-link back-link">Înapoi la listă</a>
-   </div>
-
-   <ng-container *ngIf="!loadingError && (recipe$ | async) as recipe">
-     <ng-container *ngIf="recipe; else recipeNotFoundOrError">
-         <h2>{{ recipe.title }}</h2>
-         <img *ngIf="recipe.imageUrl" [src]="recipe.imageUrl" [alt]="recipe.title" class="recipe-image"> <p class="recipe-description">{{ recipe.description }}</p> <h3>Ingrediente:</h3>
-         <ul class="ingredients-list"> <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
-         </ul>
-
-         <h3>Instrucțiuni:</h3>
-         <div class="recipe-instructions">{{ recipe.instructions }}</div> <div class="recipe-actions"> <a [routerLink]="['/recipes', recipe.id, 'edit']" class="action-link">Editează Rețeta</a>
-             <a routerLink="/recipes" class="action-link back-link">Înapoi la listă</a>
-         </div>
-     </ng-container>
-     <ng-template #recipeNotFoundOrError>
-         <p *ngIf="!loadingError">Rețeta nu a putut fi găsită.</p>
-     </ng-template>
-   </ng-container>
-
+<!-- Recipe Not Found -->
+<div *ngIf="!isLoading && !loadingError && !recipe">
+  <p>Rețeta nu a putut fi găsită.</p>
+  <a routerLink="/recipes" class="action-link back-link">Înapoi la listă</a>
 </div>

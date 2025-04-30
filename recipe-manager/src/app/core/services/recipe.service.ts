@@ -8,7 +8,7 @@ export interface Recipe {
   id: string | number;
   title: string;
   description: string;
-  ingredients: string; // JSON string care va fi parsată în frontend
+  ingredients: string; // JSON string care va fi parsată în fronten
   instructions: string;
   imageUrl?: string;
 }

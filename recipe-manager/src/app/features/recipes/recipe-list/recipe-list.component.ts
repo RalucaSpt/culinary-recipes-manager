@@ -6,6 +6,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
 import { Recipe, RecipeService } from '../../../core/services/recipe.service';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -19,6 +20,8 @@ export class RecipeListComponent implements OnInit {
   recipes$!: Observable<Recipe[]>;
   isLoading = false;
   loadingError: string | null = null;
+
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.loadRecipes();
@@ -69,5 +72,9 @@ export class RecipeListComponent implements OnInit {
         }
       });
     }
+  }
+
+  goToRecipeDetail(recipeId: string | number): void {
+    this.router.navigate(['/recipes', recipeId]);
   }
 }

@@ -13,7 +13,7 @@
 
   <ng-container *ngIf="recipes$ | async as recipes">
     <ul *ngIf="recipes.length > 0; else noRecipes">
-      <li *ngFor="let recipe of recipes">
+      <li *ngFor="let recipe of recipes" (click)="goToRecipeDetail(recipe.id)">
         <h3>{{ recipe.title }}</h3>
         <p>{{ recipe.description }}</p>
       </li>

@@ -13,6 +13,26 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Ruta GET /api/recipes/:id
+router.get('/:id', async (req, res) => {
+  console.log('Testing GET /api/recipes/:id', req.params.id); // Debugging line
+  const recipeId = parseInt(req.params.id, 10);
+  if (isNaN(recipeId)) {
+    return res.status(400).json({ error: 'ID invalid' });
+  }
+
+  try {
+    const result = await pool.query('SELECT * FROM recipes WHERE id = $1', [recipeId]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Rețeta nu a fost găsită' });
+    }
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Eroare la GET /api/recipes/:id:', error);
+    res.status(500).json({ error: 'Eroare la încărcarea rețetei' });
+  }
+});
+
 // Ruta POST /api/recipes
 router.post('/', async (req, res) => {
     try {
