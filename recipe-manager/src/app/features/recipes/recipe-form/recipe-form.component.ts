@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { RecipeService } from '../../../core/services/recipe.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; 
 import { ReactiveFormsModule } from '@angular/forms';   
+
 @Component({
   selector: 'app-recipe-form',
   standalone: true,
@@ -11,17 +12,17 @@ import { ReactiveFormsModule } from '@angular/forms';
   templateUrl: './recipe-form.component.html',
   styleUrls: ['./recipe-form.component.css']
 })
-
-export class RecipeFormComponent {
+export class RecipeFormComponent implements OnInit {
   recipeForm: FormGroup;
   isEditMode = false;
+  recipeId: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private recipeService: RecipeService,
+    private route: ActivatedRoute,
     private router: Router
   ) {
-    // AICI creezi formularul corect:
     this.recipeForm = this.fb.group({
       title : ['', Validators.required],
       description: ['', Validators.required],
@@ -33,40 +34,85 @@ export class RecipeFormComponent {
     });
   }
 
-  get ingredientsControls() {
-    return this.recipeForm.get('ingredients') as FormArray;
-  }
+  ngOnInit(): void {
+    this.recipeId = this.route.snapshot.paramMap.get('id');
 
-  addIngredient() {
-    this.ingredientsControls.push(this.fb.control('', Validators.required));
-  }
+    if (this.recipeId) {
+      this.isEditMode = true;
+      this.recipeService.getRecipeById(this.recipeId).subscribe({
+        next: (recipe) => {
+          this.recipeForm.patchValue({
+            title: recipe.title,
+            description: recipe.description,
+            imageUrl: recipe.imageUrl,
+            instructions: recipe.instructions
+          });
 
-  removeIngredient(index: number) {
-    this.ingredientsControls.removeAt(index);
-  }
+          this.ingredients.clear();
 
-  onSubmit() {
-    if (this.recipeForm.valid) {
-      const recipeData = this.recipeForm.value;
-  
-      this.recipeService.createRecipe(recipeData).subscribe({
-        next: (response) => {
-          console.log('Rețetă creată:', response);
-  
-          // Evită router.navigate ca să vedem dacă eroarea dispare
-          setTimeout(() => {
-            alert('Rețetă salvată cu succes! Verifică lista.');
-          }, 100);
-  
-          // this.router.navigate(['/recipes']); ← lasă-l comentat de test
+          const parsedIngredients = Array.isArray(recipe.ingredients)
+            ? recipe.ingredients
+            : JSON.parse(recipe.ingredients);
+
+          parsedIngredients.forEach((ing: string) => {
+            this.ingredients.push(this.fb.control(ing, Validators.required));
+          });
         },
-        error: (error) => {
-          console.error('Eroare la adăugare rețetă:', error);
+        error: (err) => {
+          console.error('Eroare la încărcarea rețetei pentru editare:', err);
         }
       });
     }
   }
-  
+
+  get ingredients() {
+    return this.recipeForm.get('ingredients') as FormArray;
+  }
+
+  get ingredientsControls() {
+    return this.ingredients;
+  }
+
+  addIngredient() {
+    this.ingredients.push(this.fb.control('', Validators.required));
+  }
+
+  removeIngredient(index: number) {
+    this.ingredients.removeAt(index);
+  }
+
+  onSubmit() {
+    if (this.recipeForm.valid) {
+      const recipeData = {
+        ...this.recipeForm.value,
+        ingredients: JSON.stringify(this.recipeForm.value.ingredients)
+      };
+
+      if (this.isEditMode && this.recipeId) {
+        this.recipeService.updateRecipe(this.recipeId, recipeData).subscribe({
+          next: () => {
+            alert('Rețetă actualizată cu succes!');
+            this.router.navigate(['/recipes']);
+          },
+          error: (err) => {
+            console.error('Eroare la actualizare rețetă:', err);
+            alert('Eroare la actualizarea rețetei.');
+          }
+        });
+      } else {
+        this.recipeService.createRecipe(recipeData).subscribe({
+          next: () => {
+            alert('Rețetă creată cu succes!');
+            this.router.navigate(['/recipes']);
+          },
+          error: (err) => {
+            console.error('Eroare la adăugare rețetă:', err);
+          }
+        });
+      }
+    }
+  }
+
   cancel() {
     this.router.navigate(['/recipes']);
   }

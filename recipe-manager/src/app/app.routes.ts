@@ -48,4 +48,6 @@ export const routes: Routes = [
     loadComponent: () => import('./components/not-found/not-found.component').then(m => m.NotFoundComponent),
     title: 'Pagina Nu A Fost Găsită'
   }
+
+  
 ];

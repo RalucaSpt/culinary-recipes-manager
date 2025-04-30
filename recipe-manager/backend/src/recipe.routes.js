@@ -63,4 +63,29 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// Ruta PUT /api/recipes/:id
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description, ingredients, instructions, imageUrl } = req.body;
+
+    const result = await pool.query(
+      `UPDATE recipes
+       SET title = $1, description = $2, ingredients = $3, instructions = $4, imageurl = $5
+       WHERE id = $6 RETURNING *`,
+      [title, description, ingredients, instructions, imageUrl, id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Rețeta nu a fost găsită' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Eroare la PUT /api/recipes/:id:', error);
+    res.status(500).json({ error: 'Eroare la actualizarea rețetei' });
+  }
+});
+
+
 module.exports = router;
