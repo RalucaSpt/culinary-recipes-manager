@@ -29,21 +29,26 @@ export class RecipeService {
 
   // Obține o rețetă după ID
   getRecipeById(id: string | number): Observable<Recipe> {
-    return this.http.get<Recipe>(`${this.apiUrl}/${id}`);
+    return this.http.get<Recipe>(`${this.apiUrl}/${id}`, {
+      withCredentials: true // ← IMPORTANT pentru sesiuni
+    });
   }
-
-  // Creează o rețetă nouă
+  
   createRecipe(recipeData: Omit<Recipe, 'id'>): Observable<Recipe> {
-    return this.http.post<Recipe>(this.apiUrl, recipeData);
+    return this.http.post<Recipe>(this.apiUrl, recipeData, {
+      withCredentials: true
+    });
   }
-
-  // Actualizează o rețetă
+  
   updateRecipe(id: string | number, recipeData: Partial<Recipe>): Observable<Recipe> {
-    return this.http.put<Recipe>(`${this.apiUrl}/${id}`, recipeData);
+    return this.http.put<Recipe>(`${this.apiUrl}/${id}`, recipeData, {
+      withCredentials: true
+    });
   }
-
-  // Șterge o rețetă
+  
   deleteRecipe(id: string | number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}`, {
+      withCredentials: true
+    });
   }
 }

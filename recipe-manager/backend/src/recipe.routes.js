@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db/db');
+const isAuthenticated = require('../auth/auth.middleware');
 
 // Ruta GET /api/recipes
 router.get('/', async (req, res) => {
@@ -14,7 +15,7 @@ router.get('/', async (req, res) => {
 });
 
 // Ruta GET /api/recipes/:id
-router.get('/:id', async (req, res) => {
+router.get('/:id', isAuthenticated, async (req, res) => {
   console.log('Testing GET /api/recipes/:id', req.params.id); // Debugging line
   const recipeId = parseInt(req.params.id, 10);
   if (isNaN(recipeId)) {
@@ -34,7 +35,7 @@ router.get('/:id', async (req, res) => {
 });
 
 // Ruta POST /api/recipes
-router.post('/', async (req, res) => {
+router.post('/', isAuthenticated, async (req, res) => {
     try {
       const { title, description, ingredients, instructions, imageUrl } = req.body;
   
