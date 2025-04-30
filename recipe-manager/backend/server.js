@@ -7,8 +7,8 @@ const recipeRoutes = require('./src/recipe.routes');
 const authRoutes = require('./auth/auth.routes');
 
 app.use(cors({
-  origin: 'http://localhost:4200', // Explicitly allow the Angular frontend
-  credentials: true, // Allow cookies and credentials
+  origin: ['http://localhost:4200', 'http://localhost:8081'], 
+  credentials: true,
 }));
 
 app.use(express.json());

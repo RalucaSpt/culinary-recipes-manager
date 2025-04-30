@@ -18,7 +18,7 @@ export interface Recipe {
 })
 export class RecipeService {
   private http = inject(HttpClient);
-  private apiUrl = '/api/recipes';
+  private apiUrl = 'http://localhost:3001/api/recipes'; // URL-ul API-ului pentru rețete
 
   constructor() { }
 

@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: . 
+      dockerfile: ./Dockerfile # Dockerfile-ul frontendului
+    ports:
+      - "8081:80" # Portul pentru acces frontend din browser
+    depends_on: # Frontend depinde de backend (opțional, dar bun pt pornire ordonată)
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend 
+      dockerfile: ./Dockerfile # Dockerfile-ul backendului 
+    ports:
+      - "3001:3000"
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: 'postgresql://postgres:HdSPPQpRHWjasmwVUaRfTunmfroqRhOe@shortline.proxy.rlwy.net:56402/railway' # <--- URL-ul tău Railway
+      JWT_SECRET: your_super_secret_jwt_key_schimba_asta # SCHIMBĂ ASTA!
+
+    networks:
+      - app-network
+    restart: unless-stopped 
+
+
+networks:
+  app-network:
+    driver: bridge
+
