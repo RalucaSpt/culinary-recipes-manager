@@ -3,13 +3,14 @@ import { HttpInterceptorFn, HttpRequest, HttpHandlerFn } from '@angular/common/h
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service'; // Calea corectă
 
-// Interceptor funcțional (sintaxa modernă)
 export const authInterceptor: HttpInterceptorFn = (
   req: HttpRequest<unknown>,
   next: HttpHandlerFn
 ) => {
-  const authService = inject(AuthService);
+  const authReq = req.clone({
+    withCredentials: true // <-- Adaugă cookies în requesturi
+  });
 
-
-  return next(req);
+  return next(authReq); // <-- Trimite request-ul clonat, nu pe cel original
 };
+

@@ -45,13 +45,9 @@ export class RecipeDetailComponent implements OnInit {
         next: (fetchedRecipe) => {
           console.log('Recipe fetched successfully:', fetchedRecipe);
           if (fetchedRecipe && typeof fetchedRecipe.ingredients === 'string') {
-            try {
-              fetchedRecipe.ingredients = JSON.parse(fetchedRecipe.ingredients);
-            } catch (error) {
-              console.error('Error parsing ingredients:', error);
-              fetchedRecipe.ingredients = '';
-            }
+            fetchedRecipe.ingredients = (fetchedRecipe.ingredients as string).split(',').map((i: string) => i.trim());
           }
+          
           this.recipe = fetchedRecipe;
           console.log('Recipe property set:', this.recipe);
         },

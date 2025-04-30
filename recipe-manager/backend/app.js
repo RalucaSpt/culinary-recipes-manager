@@ -1,43 +1,33 @@
 const express = require('express');
 const session = require('express-session');
-const authRoutes = require('./auth/auth.routes');
 const cors = require('cors');
+const authRoutes = require('./auth/auth.routes');
 
 const app = express();
 
-app.use(express.json());
+// 1. CORS - trebuie PRIMUL!
+app.use(cors({
+  origin: 'http://localhost:4200',
+  credentials: true
+}));
 
+// 2. express-session
 app.use(session({
-  secret: 'super_secret_key', 
+  secret: 'super_secret_key',
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false,
+    secure: false,        // true doar pe HTTPS
     httpOnly: true,
+    sameSite: 'lax',      // pentru a permite în mod explicit cookie cross-site (localhost:4200 → 3000)
     maxAge: 1000 * 60 * 60
   }
 }));
 
-// Updated CORS configuration
-app.use(cors({
-  origin: 'http://localhost:4200', // Explicitly allow the Angular frontend
-  credentials: true, // Allow cookies and credentials
-}));
+// 3. express.json
+app.use(express.json());
 
-// Handle preflight requests globally
-app.options('*', cors({
-  origin: 'http://localhost:4200',
-  credentials: true,
-}));
-
+// 4. Rute
 app.use('/api/auth', authRoutes);
-
-app.get('/', (req, res) => {
-  res.send('Backend with sessions is running!');
-});
-
-app.use((req, res) => {
-  res.status(404).json({ message: 'Route not found' });
-});
 
 module.exports = app;
