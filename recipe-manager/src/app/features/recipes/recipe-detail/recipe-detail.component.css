@@ -116,5 +116,6 @@
   
   .delete-button:hover {
     background-color: #b02a37;
+    border-radius: 20px;
   }
   

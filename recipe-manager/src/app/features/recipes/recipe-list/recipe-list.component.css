@@ -4,6 +4,8 @@
 :host {
   display: block; /* Componenta ocupă spațiu */
   padding: 20px 25px; /* Spațiu interior */
+  background: linear-gradient(to right, #f9f9f9, #e0eafc);
+  border-radius: 20px;
 }
 
 /* Stil pentru titlu */
@@ -23,7 +25,7 @@ a[routerLink="/recipes/new"] { /* Selector specific pentru acest link */
   background-color: #28a745; /* Verde (Bootstrap success) */
   color: white; /* Text alb */
   text-decoration: none; /* Elimină sublinierea */
-  border-radius: 4px; /* Colțuri rotunjite */
+  border-radius: 25px; /* Colțuri rotunjite */
   font-weight: 500; /* Text ușor îngroșat */
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1); /* Umbră subtilă */
@@ -49,7 +51,7 @@ li {
   padding: 15px 20px; /* Spațiu interior generos */
   border: 1px solid #e0e0e0; /* Margine fină */
   margin-bottom: 12px; /* Spațiu între elementele listei */
-  border-radius: 5px; /* Colțuri rotunjite */
+  border-radius: 25px; /* Colțuri rotunjite */
   background-color: #fff; /* Fundal alb */
   cursor: pointer; /* Indică faptul că elementul este clickabil (datorită [routerLink]) */
   transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -80,7 +82,7 @@ li button {
   background-color: #dc3545; /* Roșu (Bootstrap danger) */
   color: white; /* Text alb */
   border: none; /* Fără margine */
-  border-radius: 4px; /* Colțuri rotunjite */
+  border-radius: 25px; /* Colțuri rotunjite */
   cursor: pointer; /* Cursor specific */
   font-size: 0.85em; /* Font puțin mai mic */
   line-height: 1.4; /* Aliniere text în buton */
