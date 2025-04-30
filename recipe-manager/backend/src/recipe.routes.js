@@ -50,5 +50,17 @@ router.post('/', isAuthenticated, async (req, res) => {
       res.status(500).json({ error: 'Eroare la salvarea rețetei' });
     }
   });
-  
+
+// Ruta DELETE /api/recipes/:id
+router.delete('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.query('DELETE FROM recipes WHERE id = $1', [id]);
+    res.sendStatus(204); // No Content
+  } catch (error) {
+    console.error('Eroare la DELETE /api/recipes/:id:', error);
+    res.status(500).json({ error: 'Eroare la ștergerea rețetei' });
+  }
+});
+
 module.exports = router;

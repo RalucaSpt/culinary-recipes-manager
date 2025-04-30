@@ -18,12 +18,10 @@
   <p class="recipe-description">{{ recipe.description }}</p>
 
   <h3>Ingrediente:</h3>
-  <!-- Check if ingredients is actually an array before iterating -->
   <ul *ngIf="recipe.ingredients && recipe.ingredients.length > 0" class="ingredients-list">
     <li *ngFor="let ingredient of recipe.ingredients">{{ ingredient }}</li>
   </ul>
   <p *ngIf="!recipe.ingredients || recipe.ingredients.length === 0">Nu sunt specificate ingrediente.</p>
-
 
   <h3>Instrucțiuni:</h3>
   <div class="recipe-instructions">{{ recipe.instructions }}</div>
@@ -31,6 +29,7 @@
   <div class="recipe-actions">
     <a [routerLink]="['/recipes', recipe.id, 'edit']" class="action-link">Editează Rețeta</a>
     <a routerLink="/recipes" class="action-link back-link">Înapoi la listă</a>
+    <button (click)="deleteRecipe()" class="delete-button">Șterge Rețeta</button>
   </div>
 </div>
 
