@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8081:80" # Map host port 8081 to container port 80
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./backend # Set context back to the backend directory
+      dockerfile: Dockerfile # Dockerfile is at the root of this context
+    ports:
+      - "3001:3000" # Map host port 3001 to container port 3000
+    environment:
+      # Define environment variables needed by your backend
+      # Replace with your actual values or use a .env file
+      NODE_ENV: production
+      DATABASE_URL: mongodb://mongo:27017/recipe_manager # Example using a potential mongo service
+      JWT_SECRET: your_super_secret_jwt_key # CHANGE THIS!
+      # Add other environment variables as needed
+    depends_on:
+      - mongo # Add dependency if using a database service
+    networks:
+      - app-network
+    # Optional: Add volumes for persistent data or development
+    # volumes:
+    #   - ./backend:/usr/src/app # Mount local code for development (use with caution)
+    #   - /usr/src/app/node_modules # Prevent local node_modules from overwriting container's
+
+  # Optional: Add a database service like MongoDB
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data: # Define a named volume for MongoDB data persistence
